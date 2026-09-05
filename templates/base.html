@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Explorer - All in One</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        .tab-pane {
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .gradient-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            transition: all 0.3s;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .nav-tabs .nav-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white !important;
+            border: none;
+        }
+        .nav-tabs .nav-link {
+            color: #495057;
+            border: 1px solid #dee2e6;
+            margin-right: 5px;
+            border-radius: 8px 8px 0 0;
+        }
+        .nav-tabs .nav-link:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+        .modal-content {
+            border: none;
+            border-radius: 15px;
+        }
+        .modal-header {
+            border-radius: 15px 15px 0 0;
+        }
+        .modal-footer {
+            border-radius: 0 0 15px 15px;
+        }
+        .list-group-item {
+            border-left: none;
+            border-right: none;
+        }
+        .list-group-item:first-child {
+            border-top: none;
+        }
+        .list-group-item:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark gradient-header shadow-lg">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">
+                <i class="bi bi-box-seam"></i> ML Explorer
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">
+                            <i class="bi bi-house"></i> Home
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="py-4">
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white border-top py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 text-center text-md-start">
+                    <h6 class="fw-bold">
+                        <i class="bi bi-box-seam"></i> ML Explorer
+                    </h6>
+                    <p class="text-muted small mb-0">
+                        All-in-One Machine Learning Platform
+                    </p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <p class="text-muted small mb-0">
+                        <i class="bi bi-code-square"></i> Flask & Bootstrap 5
+                    </p>
+                    <p class="text-muted small mb-0">
+                        <i class="bi bi-graph-up-arrow"></i> Linear Regression Demo
+                    </p>
+                </div>
+                <div class="col-md-4 text-center text-md-end">
+                    <span class="badge bg-info">v2.0</span>
+                    <span class="badge bg-success">All in One</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

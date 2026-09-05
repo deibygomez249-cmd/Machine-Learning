@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block title %}Reinforcement Learning - ML Explorer{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-10">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ url_for('ml_intro') }}">ML Intro</a></li>
+                <li class="breadcrumb-item active">Reinforcement Learning</li>
+            </ol>
+        </nav>
+
+        <div class="card shadow-lg border-0">
+            <div class="card-header bg-warning text-dark py-3">
+                <h2 class="mb-0">
+                    <i class="bi bi-arrow-repeat"></i> Reinforcement Learning
+                </h2>
+            </div>
+            <div class="card-body p-4">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <h4 class="text-warning">Definition</h4>
+                        <p class="lead">
+                            Reinforcement learning is a machine learning approach where an agent learns to make decisions by taking actions in an environment to maximize cumulative reward.
+                        </p>
+
+                        <div class="alert alert-warning">
+                            <i class="bi bi-trophy"></i> <strong>Key Characteristic:</strong> The agent learns through trial and error, receiving rewards or penalties for its actions.
+                        </div>
+
+                        <h5 class="mt-4 text-warning">
+                            <i class="bi bi-cpu"></i> Key Components
+                        </h5>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="card border-0 bg-light">
+                                    <div class="card-body">
+                                        <h6 class="card-title">
+                                            <i class="bi bi-person text-warning"></i> Agent
+                                        </h6>
+                                        <p class="small">The learner/decision maker</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card border-0 bg-light">
+                                    <div class="card-body">
+                                        <h6 class="card-title">
+                                            <i class="bi bi-globe text-primary"></i> Environment
+                                        </h6>
+                                        <p class="small">Where the agent operates</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card border-0 bg-light">
+                                    <div class="card-body">
+                                        <h6 class="card-title">
+                                            <i class="bi bi-arrow-right text-success"></i> Action
+                                        </h6>
+                                        <p class="small">What the agent can do</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card border-0 bg-light">
+                                    <div class="card-body">
+                                        <h6 class="card-title">
+                                            <i class="bi bi-star text-gold"></i> Reward
+                                        </h6>
+                                        <p class="small">Feedback signal</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h5 class="mt-4 text-warning">
+                            <i class="bi bi-gear"></i> Common Algorithms
+                        </h5>
+                        <div class="d-flex flex-wrap gap-2">
+                            <span class="badge bg-warning p-2">Q-Learning</span>
+                            <span class="badge bg-danger p-2">Deep Q-Network</span>
+                            <span class="badge bg-success p-2">Policy Gradient</span>
+                            <span class="badge bg-info p-2">PPO</span>
+                            <span class="badge bg-secondary p-2">SAC</span>
+                            <span class="badge bg-primary p-2">TD3</span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-5">
+                        <div class="card border-0 bg-light">
+                            <div class="card-body text-center">
+                                <i class="bi bi-arrow-repeat" style="font-size: 4rem; color: #ffc107;"></i>
+                                <h6 class="mt-3">Real-World Applications</h6>
+                                <ul class="list-group list-group-flush text-start">
+                                    <li class="list-group-item">
+                                        <i class="bi bi-robot text-warning"></i> Game AI (AlphaGo, Chess)
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="bi bi-car-front text-success"></i> Autonomous Driving
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="bi bi-gear text-info"></i> Robotics Control
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="bi bi-bar-chart text-primary"></i> Resource Management
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="card bg-warning bg-opacity-10 border-0">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <i class="bi bi-box-arrow-right"></i> Explore Other ML Types
+                                </h5>
+                                <div class="d-flex flex-wrap gap-2">
+                                    <a href="{{ url_for('supervised_learning') }}" class="btn btn-primary">
+                                        <i class="bi bi-diagram-2"></i> Supervised
+                                    </a>
+                                    <a href="{{ url_for('unsupervised_learning') }}" class="btn btn-success">
+                                        <i class="bi bi-diagram-3"></i> Unsupervised
+                                    </a>
+                                    <a href="{{ url_for('ml_intro') }}" class="btn btn-outline-warning">
+                                        <i class="bi bi-arrow-left"></i> Back to Intro
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

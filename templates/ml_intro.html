@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block title %}What is Machine Learning? - ML Explorer{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-10">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+                <li class="breadcrumb-item active">What is Machine Learning?</li>
+            </ol>
+        </nav>
+
+        <div class="card shadow-lg border-0">
+            <div class="card-header bg-primary text-white py-3">
+                <h2 class="mb-0">
+                    <i class="bi bi-info-circle"></i> What is Machine Learning?
+                </h2>
+            </div>
+            <div class="card-body p-4">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h4 class="text-primary">Definition</h4>
+                        <p class="lead">
+                            Machine Learning is a subset of Artificial Intelligence (AI) that enables systems to learn and improve from experience without being explicitly programmed.
+                        </p>
+                        
+                        <div class="alert alert-info">
+                            <i class="bi bi-lightbulb"></i> <strong>Key Concept:</strong> ML algorithms use statistical techniques to find patterns in data and make predictions or decisions.
+                        </div>
+
+                        <h5 class="mt-4 text-primary">
+                            <i class="bi bi-grid"></i> How Does It Work?
+                        </h5>
+                        <ol class="list-group list-group-numbered mb-4">
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">Data Collection</div>
+                                    Gathering relevant data for the problem
+                                </div>
+                                <span class="badge bg-primary rounded-pill">Step 1</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">Data Preparation</div>
+                                    Cleaning and preprocessing the data
+                                </div>
+                                <span class="badge bg-primary rounded-pill">Step 2</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">Model Training</div>
+                                    Using algorithms to learn patterns
+                                </div>
+                                <span class="badge bg-primary rounded-pill">Step 3</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">Model Evaluation</div>
+                                    Testing the model's performance
+                                </div>
+                                <span class="badge bg-primary rounded-pill">Step 4</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">Prediction/Deployment</div>
+                                    Using the model for real-world applications
+                                </div>
+                                <span class="badge bg-primary rounded-pill">Step 5</span>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="card bg-light border-0">
+                            <div class="card-body text-center">
+                                <i class="bi bi-diagram-3" style="font-size: 4rem; color: #667eea;"></i>
+                                <h6 class="mt-3">ML Types Overview</h6>
+                                <div class="d-grid gap-2 mt-3">
+                                    <a href="{{ url_for('supervised_learning') }}" class="btn btn-outline-primary btn-sm">
+                                        <i class="bi bi-diagram-2"></i> Supervised
+                                    </a>
+                                    <a href="{{ url_for('unsupervised_learning') }}" class="btn btn-outline-success btn-sm">
+                                        <i class="bi bi-diagram-3"></i> Unsupervised
+                                    </a>
+                                    <a href="{{ url_for('reinforcement_learning') }}" class="btn btn-outline-warning btn-sm">
+                                        <i class="bi bi-arrow-repeat"></i> Reinforcement
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Navigation -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="card bg-primary bg-opacity-10 border-0">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <i class="bi bi-compass"></i> Explore ML Types
+                                </h5>
+                                <div class="d-flex flex-wrap gap-2">
+                                    <a href="{{ url_for('supervised_learning') }}" class="btn btn-primary">
+                                        <i class="bi bi-diagram-2"></i> Supervised Learning
+                                    </a>
+                                    <a href="{{ url_for('unsupervised_learning') }}" class="btn btn-success">
+                                        <i class="bi bi-diagram-3"></i> Unsupervised Learning
+                                    </a>
+                                    <a href="{{ url_for('reinforcement_learning') }}" class="btn btn-warning">
+                                        <i class="bi bi-arrow-repeat"></i> Reinforcement Learning
+                                    </a>
+                                    <a href="{{ url_for('predict_weight') }}" class="btn btn-outline-secondary">
+                                        <i class="bi bi-graph-up"></i> Try Demo
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

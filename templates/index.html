@@ -1,0 +1,742 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-12">
+        <!-- Hero Section -->
+        <div class="card border-0 shadow-lg gradient-header text-white mb-4">
+            <div class="card-body p-5">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h1 class="display-4 fw-bold">
+                            <i class="bi bi-robot"></i> ML Explorer
+                        </h1>
+                        <p class="lead">
+                            Explore Machine Learning concepts, try predictions, and visualize data<br>
+                            <small class="text-light">All in one single page</small>
+                        </p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <i class="bi bi-boxes" style="font-size: 5rem;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs Navigation -->
+        <ul class="nav nav-tabs nav-fill mb-4" id="mlTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="intro-tab" data-bs-toggle="tab" data-bs-target="#intro" type="button" role="tab">
+                    <i class="bi bi-info-circle"></i> Introduction
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="app-tab" data-bs-toggle="tab" data-bs-target="#application" type="button" role="tab">
+                    <i class="bi bi-bar-chart"></i> Application
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="viz-tab" data-bs-toggle="tab" data-bs-target="#visualization" type="button" role="tab">
+                    <i class="bi bi-bar-chart-fill"></i> Visualization
+                </button>
+            </li>
+        </ul>
+
+        <!-- Tab Content -->
+        <div class="tab-content" id="mlTabsContent">
+
+            <!-- TAB 1: Introduction -->
+            <div class="tab-pane fade show active" id="intro" role="tabpanel">
+                <div class="card shadow-lg border-0">
+                    <div class="card-header bg-primary text-white py-3">
+                        <h3 class="mb-0"><i class="bi bi-info-circle"></i> What is Machine Learning?</h3>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <p class="lead">
+                                    <strong>Machine Learning (ML)</strong> is a branch of Artificial Intelligence that allows computers to learn from data, recognize patterns, and make predictions or decisions without being explicitly programmed for every specific scenario.
+                                </p>
+                                <p>For example, it can be used to detect spam emails, recommend products, recognize images, analyze data, or make forecasts.</p>
+                                
+                                <h5 class="mt-4 text-primary">
+                                    <i class="bi bi-diagram-3"></i> Types of Machine Learning
+                                </h5>
+                                <div class="row g-3 mt-2">
+                                    <div class="col-md-6">
+                                        <div class="card h-100 border-0 bg-light">
+                                            <div class="card-body">
+                                                <h6 class="text-primary"><i class="bi bi-tags"></i> Supervised Learning</h6>
+                                                <p class="small">The system learns using previously labeled data, where the expected output is already known.</p>
+                                                <p class="small"><em>Example:</em> Training a system with images identified as "dog" and "cat" so it can classify them later.</p>
+                                                <span class="badge bg-primary">Classification & Regression</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card h-100 border-0 bg-light">
+                                            <div class="card-body">
+                                                <h6 class="text-success"><i class="bi bi-diagram-3"></i> Unsupervised Learning</h6>
+                                                <p class="small">The system works with unlabeled data and independently searches for patterns, relationships, or clusters.</p>
+                                                <p class="small"><em>Example:</em> Grouping customers based on their purchasing habits.</p>
+                                                <span class="badge bg-success">Clustering & Dimensionality Reduction</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card h-100 border-0 bg-light">
+                                            <div class="card-body">
+                                                <h6 class="text-warning"><i class="bi bi-magic"></i> Semi-supervised Learning</h6>
+                                                <p class="small">Combines both previous methods. Uses a small amount of labeled data alongside a larger amount of unlabeled data.</p>
+                                                <p class="small"><em>Example:</em> Classifying thousands of images when only a few have been previously identified.</p>
+                                                <span class="badge bg-warning">Hybrid Approach</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card h-100 border-0 bg-light">
+                                            <div class="card-body">
+                                                <h6 class="text-danger"><i class="bi bi-arrow-repeat"></i> Reinforcement Learning</h6>
+                                                <p class="small">The system learns through trial and error. Receives rewards when performing actions correctly and penalties when making incorrect decisions.</p>
+                                                <p class="small"><em>Example:</em> Training an AI agent to learn how to play a video game.</p>
+                                                <span class="badge bg-danger">Reward-based Learning</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h5 class="mt-4 text-primary">
+                                    <i class="bi bi-grid"></i> How Does It Work? (Step by Step)
+                                </h5>
+                                <p class="text-muted small">Click each button to learn more about the process.</p>
+                                <div class="d-grid gap-2 mt-2">
+                                    <button type="button" class="btn btn-outline-primary text-start d-flex align-items-center" 
+                                            data-bs-toggle="modal" data-bs-target="#step1Modal">
+                                        <span class="badge bg-primary rounded-pill me-3">1</span>
+                                        <span class="flex-grow-1">Data Collection</span>
+                                        <i class="bi bi-chevron-right"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-outline-success text-start d-flex align-items-center" 
+                                            data-bs-toggle="modal" data-bs-target="#step2Modal">
+                                        <span class="badge bg-success rounded-pill me-3">2</span>
+                                        <span class="flex-grow-1">Data Preparation</span>
+                                        <i class="bi bi-chevron-right"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-outline-warning text-start d-flex align-items-center" 
+                                            data-bs-toggle="modal" data-bs-target="#step3Modal">
+                                        <span class="badge bg-warning rounded-pill me-3">3</span>
+                                        <span class="flex-grow-1">Model Training</span>
+                                        <i class="bi bi-chevron-right"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-outline-danger text-start d-flex align-items-center" 
+                                            data-bs-toggle="modal" data-bs-target="#step4Modal">
+                                        <span class="badge bg-danger rounded-pill me-3">4</span>
+                                        <span class="flex-grow-1">Model Evaluation</span>
+                                        <i class="bi bi-chevron-right"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-outline-info text-start d-flex align-items-center" 
+                                            data-bs-toggle="modal" data-bs-target="#step5Modal">
+                                        <span class="badge bg-info rounded-pill me-3">5</span>
+                                        <span class="flex-grow-1">Prediction/Deployment</span>
+                                        <i class="bi bi-chevron-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="card bg-light border-0">
+                                    <div class="card-body text-center">
+                                        <i class="bi bi-diagram-3" style="font-size: 4rem; color: #667eea;"></i>
+                                        <h6 class="mt-3">ML Types Overview</h6>
+                                        <div class="d-grid gap-2">
+                                            <span class="badge bg-primary p-2">Supervised</span>
+                                            <span class="badge bg-success p-2">Unsupervised</span>
+                                            <span class="badge bg-warning p-2">Semi-supervised</span>
+                                            <span class="badge bg-danger p-2">Reinforcement</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: Application -->
+            <div class="tab-pane fade" id="application" role="tabpanel">
+                <div class="card shadow-lg border-0">
+                    <div class="card-header bg-success text-white py-3">
+                        <h3 class="mb-0"><i class="bi bi-bar-chart"></i> Linear Regression Application</h3>
+                    </div>
+                    <div class="card-body p-4">
+                        <p class="lead">
+                            Explore a practical implementation of Simple Linear Regression using real data to analyze the relationship between shipping cost and package weight, and generate predictions from a trained Machine Learning model.
+                        </p>
+
+                        <h5 class="mt-4 text-success">Problem Context</h5>
+                        <p>
+                            The weight of a package is not always the same. It can vary depending on characteristics of the product and the shipping conditions. In this application, we focus specifically on the relationship between the shipping cost and the weight of the package.
+                        </p>
+                        <p>
+                            The dataset contains historical observations in which each record associates a shipping cost, measured in Colombian Pesos (COP), with the corresponding package weight, measured in kilograms. These observations provide the information required for the Machine Learning model to learn the existing relationship between both variables.
+                        </p>
+                        <p>
+                            <strong>Purpose of the application:</strong> The purpose of applying Simple Linear Regression is to use the historical data to learn a linear relationship between shipping cost and package weight. Once trained, the model can estimate the expected weight for a new shipping cost.
+                        </p>
+
+                        <h5 class="mt-4 text-success">Variables Used in the Model</h5>
+                        <p>Simple Linear Regression works with two quantitative variables. The independent variable is used as the input, while the dependent variable represents the numerical outcome that the model attempts to predict.</p>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="card bg-light border-0">
+                                    <div class="card-body">
+                                        <h6 class="text-primary"><i class="bi bi-coin"></i> X: Shipping Cost</h6>
+                                        <p class="small">Represents the cost of shipping used as the input for the prediction. Higher costs generally correspond to heavier packages.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card bg-light border-0">
+                                    <div class="card-body">
+                                        <h6 class="text-success"><i class="bi bi-box-seam"></i> Y: Package Weight</h6>
+                                        <p class="small">Represents the weight of the package. This is the value that the trained model attempts to estimate.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h5 class="mt-4 text-success">Dataset</h5>
+                        <p>The dataset contains historical observations used by the application to train the Simple Linear Regression model. Each row establishes a relationship between a shipping cost and its corresponding package weight.</p>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered">
+                                <thead class="table-success">
+                                    <tr>
+                                        <th>Shipping Cost (COP)</th>
+                                        <th>Package Weight (kg)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>5000</td><td>1.0</td></tr>
+                                    <tr><td>10000</td><td>2.0</td></tr>
+                                    <tr><td>15000</td><td>3.0</td></tr>
+                                    <tr><td>20000</td><td>4.0</td></tr>
+                                    <tr><td>25000</td><td>5.0</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h5 class="mt-4 text-success">Try the Prediction</h5>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <form id="predictionForm">
+                                    <div class="mb-4">
+                                        <label for="costInput" class="form-label fw-bold">
+                                            <i class="bi bi-coin"></i> Shipping Cost (COP)
+                                        </label>
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-text">$</span>
+                                            <input type="number" 
+                                                   class="form-control" 
+                                                   id="costInput" 
+                                                   name="cost" 
+                                                   step="0.01" 
+                                                   min="0"
+                                                   placeholder="Ej: 15000" 
+                                                   required>
+                                            <button type="submit" class="btn btn-success" id="predictBtn">
+                                                <i class="bi bi-play-fill"></i> Predict
+                                            </button>
+                                        </div>
+                                        <div class="form-text">
+                                            <i class="bi bi-info-circle"></i> Range: 5000 - 25000 COP
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <div id="resultContainer" style="display: none;">
+                                    <div class="alert alert-success border-0 shadow-sm" role="alert">
+                                        <div class="row align-items-center">
+                                            <div class="col-3 text-center">
+                                                <i class="bi bi-box-seam" style="font-size: 3rem;"></i>
+                                            </div>
+                                            <div class="col-9">
+                                                <h5 class="alert-heading">
+                                                    <i class="bi bi-check-circle-fill"></i> Prediction Result
+                                                </h5>
+                                                <div class="display-5 fw-bold text-success" id="predictionResult">
+                                                    0.00 <small class="fs-5">kg</small>
+                                                </div>
+                                                <p class="mb-0" id="costDisplay"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="errorContainer" style="display: none;">
+                                    <div class="alert alert-danger border-0 shadow-sm" role="alert" id="errorMessage">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="card bg-light border-0">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <i class="bi bi-info-circle"></i> How It Works
+                                        </h5>
+                                        <p class="small">The model uses <strong>Linear Regression</strong> trained on historical data:</p>
+                                        <ul class="list-unstyled small">
+                                            <li><i class="bi bi-check-circle text-success"></i> Training data: 5 points</li>
+                                            <li><i class="bi bi-check-circle text-success"></i> Cost range: 5,000 - 25,000 COP</li>
+                                            <li><i class="bi bi-check-circle text-success"></i> Weight range: 1.0 - 5.0 kg</li>
+                                            <li><i class="bi bi-check-circle text-success"></i> Model: LinearRegression (scikit-learn)</li>
+                                        </ul>
+                                        <div class="mt-3">
+                                            <span class="badge bg-primary">R² Score: {{ "%.4f"|format(metrics.r2_score) }}</span>
+                                            <span class="badge bg-success">Pendiente: {{ "%.4f"|format(metrics.pendiente) }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: Visualization -->
+            <div class="tab-pane fade" id="visualization" role="tabpanel">
+                <div class="card shadow-lg border-0">
+                    <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
+                        <h3 class="mb-0"><i class="bi bi-bar-chart-fill"></i> Data Visualization</h3>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="alert alert-info">
+                            <i class="bi bi-info-circle"></i> 
+                            <strong>Interpretation:</strong> Left graph shows the linear relationship between shipping cost and package weight. Right graph shows residuals (errors) to validate model performance.
+                        </div>
+                        
+                        <div class="text-center mb-4">
+                            <img src="data:image/png;base64,{{ plot_url }}" 
+                                 alt="Linear Regression Visualization" 
+                                 class="img-fluid rounded shadow">
+                        </div>
+
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-4">
+                                <div class="card bg-light border-0 text-center">
+                                    <div class="card-body">
+                                        <h6 class="text-primary">
+                                            <i class="bi bi-droplet"></i> Slope
+                                        </h6>
+                                        <p class="display-6">{{ "%.4f"|format(metrics.pendiente) }}</p>
+                                        <p class="text-muted small">Weight change per cost unit</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card bg-light border-0 text-center">
+                                    <div class="card-body">
+                                        <h6 class="text-success">
+                                            <i class="bi bi-intersect"></i> Intercept
+                                        </h6>
+                                        <p class="display-6">{{ "%.4f"|format(metrics.intercepto) }}</p>
+                                        <p class="text-muted small">Base weight when cost = 0</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card bg-light border-0 text-center">
+                                    <div class="card-body">
+                                        <h6 class="text-warning">
+                                            <i class="bi bi-check2-circle"></i> R² Score
+                                        </h6>
+                                        <p class="display-6">{{ "%.4f"|format(metrics.r2_score) }}</p>
+                                        <p class="text-muted small">Model accuracy (0-1)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card bg-primary bg-opacity-10 border-0">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <i class="bi bi-table"></i> Training Data
+                                </h5>
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Shipping Cost (COP)</th>
+                                                <th>Actual Weight (kg)</th>
+                                                <th>Predicted Weight (kg)</th>
+                                                <th>Error</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for i in range(data.costos|length) %}
+                                            <tr>
+                                                <td>{{ data.costos[i] }}</td>
+                                                <td>{{ data.pesos[i] }}</td>
+                                                <td>{{ "%.2f"|format(data.predicciones[i]) }}</td>
+                                                <td>
+                                                    <span class="badge {% if (data.pesos[i] - data.predicciones[i])|abs < 0.01 %}bg-success{% else %}bg-warning{% endif %}">
+                                                        {{ "%.4f"|format(data.pesos[i] - data.predicciones[i]) }}
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- Cierre de tab-content -->
+
+        <!-- MODALES PARA CADA PASO (igual que antes) -->
+        <!-- Modal Step 1: Data Collection -->
+        <div class="modal fade" id="step1Modal" tabindex="-1">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary text-white">
+                        <h5 class="modal-title">
+                            <i class="bi bi-database"></i> Step 1: Data Collection
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h6 class="text-primary">What is Data Collection?</h6>
+                                <p>Data collection is the process of gathering and measuring information on targeted variables in an established systematic fashion, which then enables one to answer relevant questions and evaluate outcomes.</p>
+                                
+                                <h6 class="text-primary mt-3">Key Aspects:</h6>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <i class="bi bi-check-circle-fill text-success"></i> 
+                                        <strong>Data Sources:</strong> Databases, APIs, surveys, sensors, logs
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="bi bi-check-circle-fill text-success"></i> 
+                                        <strong>Data Types:</strong> Structured, unstructured, semi-structured
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="bi bi-check-circle-fill text-success"></i> 
+                                        <strong>Our Example:</strong> Shipping costs and package weights
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card bg-light border-0">
+                                    <div class="card-body text-center">
+                                        <i class="bi bi-folder2-open" style="font-size: 4rem; color: #0d6efd;"></i>
+                                        <p class="small text-muted mt-2">Gathering relevant data for the problem</p>
+                                        <span class="badge bg-primary">Step 1</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#step2Modal">
+                            Next Step <i class="bi bi-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Step 2: Data Preparation -->
+        <div class="modal fade" id="step2Modal" tabindex="-1">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-success text-white">
+                        <h5 class="modal-title">
+                            <i class="bi bi-brush"></i> Step 2: Data Preparation
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h6 class="text-success">What is Data Preparation?</h6>
+                                <p>Data preparation is the process of cleaning, transforming, and organizing raw data to make it suitable for analysis and machine learning models.</p>
+                                
+                                <h6 class="text-success mt-3">Key Steps:</h6>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <i class="bi bi-check-circle-fill text-success"></i> 
+                                        <strong>Data Cleaning:</strong> Remove duplicates, handle missing values
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="bi bi-check-circle-fill text-success"></i> 
+                                        <strong>Data Transformation:</strong> Normalization, scaling, encoding
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="bi bi-check-circle-fill text-success"></i> 
+                                        <strong>Feature Engineering:</strong> Creating new features, selecting relevant ones
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="bi bi-check-circle-fill text-success"></i> 
+                                        <strong>Our Example:</strong> Organized data into features (cost) and labels (weight)
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card bg-light border-0">
+                                    <div class="card-body text-center">
+                                        <i class="bi bi-sliders2" style="font-size: 4rem; color: #198754;"></i>
+                                        <p class="small text-muted mt-2">Cleaning and preprocessing the data</p>
+                                        <span class="badge bg-success">Step 2</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#step1Modal">
+                            <i class="bi bi-arrow-left"></i> Previous
+                        </button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-success" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#step3Modal">
+                            Next Step <i class="bi bi-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Step 3: Model Training -->
+        <div class="modal fade" id="step3Modal" tabindex="-1">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-warning text-dark">
+                        <h5 class="modal-title">
+                            <i class="bi bi-cpu"></i> Step 3: Model Training
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h6 class="text-warning">What is Model Training?</h6>
+                                <p>Model training is the process of feeding a machine learning algorithm with data to learn patterns, relationships, and make predictions or decisions.</p>
+                                
+                                <h6 class="text-warning mt-3">Key Concepts:</h6>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <i class="bi bi-check-circle-fill text-warning"></i> 
+                                        <strong>Training Data:</strong> Input features and known outcomes
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="bi bi-check-circle-fill text-warning"></i> 
+                                        <strong>Algorithm:</strong> Learning method (Linear Regression, Neural Networks, etc.)
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="bi bi-check-circle-fill text-warning"></i> 
+                                        <strong>Learning Process:</strong> Adjusting parameters to minimize error
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="bi bi-check-circle-fill text-warning"></i> 
+                                        <strong>Our Example:</strong> Linear Regression finding relationship between cost and weight
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card bg-light border-0">
+                                    <div class="card-body text-center">
+                                        <i class="bi bi-gear-fill" style="font-size: 4rem; color: #ffc107;"></i>
+                                        <p class="small text-muted mt-2">Using algorithms to learn patterns</p>
+                                        <span class="badge bg-warning">Step 3</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#step2Modal">
+                            <i class="bi bi-arrow-left"></i> Previous
+                        </button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-warning" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#step4Modal">
+                            Next Step <i class="bi bi-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Step 4: Model Evaluation -->
+        <div class="modal fade" id="step4Modal" tabindex="-1">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-danger text-white">
+                        <h5 class="modal-title">
+                            <i class="bi bi-check2-square"></i> Step 4: Model Evaluation
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h6 class="text-danger">What is Model Evaluation?</h6>
+                                <p>Model evaluation is the process of assessing a trained model's performance using various metrics and test data to ensure it works correctly.</p>
+                                
+                                <h6 class="text-danger mt-3">Key Metrics:</h6>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <i class="bi bi-check-circle-fill text-danger"></i> 
+                                        <strong>R² Score:</strong> How well the model explains variance (0-1)
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="bi bi-check-circle-fill text-danger"></i> 
+                                        <strong>Mean Squared Error:</strong> Average squared difference
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="bi bi-check-circle-fill text-danger"></i> 
+                                        <strong>Residual Analysis:</strong> Checking error distribution
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="bi bi-check-circle-fill text-danger"></i> 
+                                        <strong>Our Example:</strong> R² score and residual plot show perfect fit
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card bg-light border-0">
+                                    <div class="card-body text-center">
+                                        <i class="bi bi-graph-up" style="font-size: 4rem; color: #dc3545;"></i>
+                                        <p class="small text-muted mt-2">Testing the model's performance</p>
+                                        <span class="badge bg-danger">Step 4</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#step3Modal">
+                            <i class="bi bi-arrow-left"></i> Previous
+                        </button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#step5Modal">
+                            Next Step <i class="bi bi-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Step 5: Prediction/Deployment -->
+        <div class="modal fade" id="step5Modal" tabindex="-1">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-info text-white">
+                        <h5 class="modal-title">
+                            <i class="bi bi-rocket-takeoff"></i> Step 5: Prediction/Deployment
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h6 class="text-info">What is Prediction/Deployment?</h6>
+                                <p>Deployment is the process of integrating a trained machine learning model into a production environment where it can make real-world predictions and decisions.</p>
+                                
+                                <h6 class="text-info mt-3">Key Aspects:</h6>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <i class="bi bi-check-circle-fill text-info"></i> 
+                                        <strong>API Integration:</strong> Exposing model via REST APIs
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="bi bi-check-circle-fill text-info"></i> 
+                                        <strong>User Interface:</strong> Web or mobile applications
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="bi bi-check-circle-fill text-info"></i> 
+                                        <strong>Monitoring:</strong> Tracking model performance over time
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="bi bi-check-circle-fill text-info"></i> 
+                                        <strong>Our Example:</strong> This web app predicts package weight in real-time
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card bg-light border-0">
+                                    <div class="card-body text-center">
+                                        <i class="bi bi-box-seam" style="font-size: 4rem; color: #0dcaf0;"></i>
+                                        <p class="small text-muted mt-2">Using the model for real-world applications</p>
+                                        <span class="badge bg-info">Step 5</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#step4Modal">
+                            <i class="bi bi-arrow-left"></i> Previous
+                        </button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-info" data-bs-dismiss="modal" data-bs-toggle="tab" data-bs-target="#application">
+                            Try Prediction <i class="bi bi-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div> <!-- Cierre del row -->
+</div> <!-- Cierre del content -->
+
+<script>
+    // Prediction via AJAX
+    document.getElementById('predictionForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const costInput = document.getElementById('costInput');
+        const predictBtn = document.getElementById('predictBtn');
+        const resultContainer = document.getElementById('resultContainer');
+        const errorContainer = document.getElementById('errorContainer');
+        const predictionResult = document.getElementById('predictionResult');
+        const costDisplay = document.getElementById('costDisplay');
+        const errorMessage = document.getElementById('errorMessage');
+        
+        resultContainer.style.display = 'none';
+        errorContainer.style.display = 'none';
+        
+        predictBtn.disabled = true;
+        predictBtn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Predicting...';
+        
+        const formData = new FormData();
+        formData.append('cost', costInput.value);
+        
+        fetch('/weight/', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            predictBtn.disabled = false;
+            predictBtn.innerHTML = '<i class="bi bi-play-fill"></i> Predict';
+            
+            if (data.error) {
+                errorContainer.style.display = 'block';
+                errorMessage.textContent = data.error;
+            } else if (data.success) {
+                resultContainer.style.display = 'block';
+                predictionResult.innerHTML = `${data.prediction} <small class="fs-5">kg</small>`;
+                costDisplay.innerHTML = `<strong>Cost:</strong> $${data.cost} COP`;
+            }
+        })
+        .catch(error => {
+            predictBtn.disabled = false;
+            predictBtn.innerHTML = '<i class="bi bi-play-fill"></i> Predict';
+            errorContainer.style.display = 'block';
+            errorMessage.textContent = 'Error connecting to server. Please try again.';
+        });
+    });
+</script>
+{% endblock %}
