@@ -1,1 +1,3 @@
 # Machine-Learning
+buid command pip install -r requirements.txt
+start command gunicorn app:app
