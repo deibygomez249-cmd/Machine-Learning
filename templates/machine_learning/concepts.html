@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Machine Learning Concepts{% endblock %}
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+        <li class="breadcrumb-item active">Machine Learning Concepts</li>
+    </ol>
+</nav>
+<div class="card shadow-sm border-0">
+    <div class="card-header bg-primary text-white"><h3 class="mb-0">Machine Learning Concepts</h3></div>
+    <div class="card-body">
+        <p class="lead">Machine Learning (ML) is a branch of Artificial Intelligence that enables computers to learn from data, recognize patterns, and make predictions without being explicitly programmed for every scenario.</p>
+        <h5 class="text-primary">Key Concepts</h5>
+        <div class="row g-3 mt-2">
+            <div class="col-md-6">
+                <div class="card h-100 border-0 bg-light">
+                    <div class="card-body">
+                        <h6><i class="bi bi-database"></i> Data</h6>
+                        <p class="small mb-0">Structured information used to train models. The quality and quantity of data directly affect model performance.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card h-100 border-0 bg-light">
+                    <div class="card-body">
+                        <h6><i class="bi bi-sliders"></i> Features</h6>
+                        <p class="small mb-0">The independent variables used by the model as inputs to generate predictions.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card h-100 border-0 bg-light">
+                    <div class="card-body">
+                        <h6><i class="bi bi-bullseye"></i> Target</h6>
+                        <p class="small mb-0">The dependent variable that the model learns to predict.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card h-100 border-0 bg-light">
+                    <div class="card-body">
+                        <h6><i class="bi bi-gear"></i> Training</h6>
+                        <p class="small mb-0">The process of adjusting the model's internal parameters using historical data.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h5 class="text-primary mt-4">The Machine Learning Workflow</h5>
+        <ol class="list-group list-group-numbered mt-3">
+            <li class="list-group-item">Data Collection</li>
+            <li class="list-group-item">Data Preparation and Cleaning</li>
+            <li class="list-group-item">Train / Test Split (80% / 20%)</li>
+            <li class="list-group-item">Model Training</li>
+            <li class="list-group-item">Model Evaluation</li>
+            <li class="list-group-item">Deployment and Prediction</li>
+        </ol>
+        <a href="{{ url_for('ml_types') }}" class="btn btn-primary mt-3">Next: Types of Machine Learning <i class="bi bi-arrow-right"></i></a>
+    </div>
+</div>
+{% endblock %}

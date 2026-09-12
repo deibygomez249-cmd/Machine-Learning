@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Use Case 2 — Student Exam Result{% endblock %}
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+        <li class="breadcrumb-item active">Use Case 2</li>
+    </ol>
+</nav>
+<div class="card shadow-sm border-0">
+    <div class="card-header bg-success text-white"><h3 class="mb-0">Use Case 2 — Student Exam Result</h3></div>
+    <div class="card-body">
+        <p>An educational platform wants to predict whether a student will pass the final exam based on their study hours. This is a <strong>binary classification problem</strong>.</p>
+        <ul>
+            <li><strong>Independent variable:</strong> Study Hours</li>
+            <li><strong>Target variable:</strong> Passed Exam (0 = Did Not Pass, 1 = Passed)</li>
+            <li><strong>Model:</strong> Logistic Regression</li>
+        </ul>
+        <a href="{{ url_for('logistic_application') }}" class="btn btn-success">Try the Application</a>
+    </div>
+</div>
+{% endblock %}

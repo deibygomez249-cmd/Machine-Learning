@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Logistic Regression — Concepts{% endblock %}
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+        <li class="breadcrumb-item active">Logistic Regression — Concepts</li>
+    </ol>
+</nav>
+<div class="card shadow-sm border-0">
+    <div class="card-header bg-success text-white"><h3 class="mb-0">Logistic Regression — Concepts</h3></div>
+    <div class="card-body">
+        <p class="lead">Logistic Regression is a supervised learning algorithm used for classification. Despite its name, it is not a regression algorithm — it predicts the probability that an observation belongs to a class.</p>
+        <h5 class="text-success">Why is it a classification algorithm?</h5>
+        <p>It outputs a probability between 0 and 1, which is then mapped to a class using a classification threshold (commonly 0.5).</p>
+        <h5 class="text-success">Binary Classification</h5>
+        <p>Binary classification means the target has exactly two classes. In this project:</p>
+        <ul>
+            <li><strong>0 = Did Not Pass</strong></li>
+            <li><strong>1 = Passed</strong></li>
+        </ul>
+        <h5 class="text-success">Key Terms</h5>
+        <ul>
+            <li><strong>Independent variable:</strong> The input feature (Study Hours).</li>
+            <li><strong>Dependent / target variable:</strong> The class to predict (Passed Exam).</li>
+            <li><strong>Classes or labels:</strong> The possible values of the target (0 or 1).</li>
+            <li><strong>Probability:</strong> The model's estimate of belonging to class 1.</li>
+            <li><strong>Classification threshold:</strong> The cutoff used to convert probability to a class (default 0.5).</li>
+        </ul>
+        <h5 class="text-success">Linear Regression vs Logistic Regression</h5>
+        <ul>
+            <li><strong>Linear Regression</strong> predicts a continuous value (e.g., weight in kg).</li>
+            <li><strong>Logistic Regression</strong> predicts a class (e.g., Passed / Did Not Pass).</li>
+        </ul>
+        <a href="{{ url_for('logistic_application') }}" class="btn btn-success">Go to Application <i class="bi bi-arrow-right"></i></a>
+    </div>
+</div>
+{% endblock %}
