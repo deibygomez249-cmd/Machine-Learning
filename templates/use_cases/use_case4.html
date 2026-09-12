@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Use Case 4 — Model Comparison{% endblock %}
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+        <li class="breadcrumb-item active">Use Case 4</li>
+    </ol>
+</nav>
+<div class="card shadow-sm border-0">
+    <div class="card-header bg-danger text-white"><h3 class="mb-0">Use Case 4 — Model Comparison</h3></div>
+    <div class="card-body">
+        <p>Educational institutions often need to compare algorithms to choose the best one. Here we compare the <strong>Logistic Regression</strong> and the <strong>Ridge Classifier</strong> using Accuracy, Precision, Recall and F1-score.</p>
+        <a href="{{ url_for('comparison') }}" class="btn btn-danger">View Comparison</a>
+    </div>
+</div>
+{% endblock %}
