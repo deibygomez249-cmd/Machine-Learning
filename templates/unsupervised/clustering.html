@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+{% block title %}Clustering Application{% endblock %}
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{ url_for('unsupervised_concepts') }}">Concepts</a></li>
+        <li class="breadcrumb-item active">Clustering Application</li>
+    </ol>
+</nav>
+
+<div class="card shadow-sm border-0 mb-4">
+    <div class="card-header bg-primary text-white">
+        <h3 class="mb-0">Used Car Market Segmentation - K-Means</h3>
+    </div>
+    <div class="card-body">
+        <h5>Dataset Information</h5>
+        <ul>
+            <li><strong>Dataset:</strong> Used Car Price Prediction (Kaggle)</li>
+            <li><strong>Reference year:</strong> {{ info.reference_year }}</li>
+            <li><strong>Valid records:</strong> {{ result.records }}</li>
+            <li><strong>Clustering variables:</strong> Vehicle Age, Mileage</li>
+            <li><strong>Scaling:</strong> StandardScaler</li>
+            <li><strong>K:</strong> 3</li>
+            <li><strong>Random state:</strong> 42</li>
+        </ul>
+    </div>
+</div>
+
+<div class="card shadow-sm border-0 mb-4">
+    <div class="card-body text-center">
+        <h5>Cluster Visualization</h5>
+        <img src="data:image/png;base64,{{ plot_url }}" alt="K-Means Clusters" class="img-fluid rounded">
+    </div>
+</div>
+
+<div class="card shadow-sm border-0 mb-4">
+    <div class="card-header bg-success text-white">
+        <h4 class="mb-0">Cluster Summary</h4>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Cluster</th>
+                        <th>Records</th>
+                        <th>Avg Vehicle Age</th>
+                        <th>Avg Mileage</th>
+                        <th>Centroid Vehicle Age</th>
+                        <th>Centroid Mileage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for s in result.summary %}
+                    <tr>
+                        <td><span class="badge bg-primary">Cluster {{ s.cluster }}</span></td>
+                        <td>{{ s.size }}</td>
+                        <td>{{ s.avg_vehicle_age }}</td>
+                        <td>{{ s.avg_mileage }}</td>
+                        <td>{{ s.centroid_vehicle_age }}</td>
+                        <td>{{ s.centroid_mileage }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm border-0 mb-4">
+    <div class="card-header bg-info text-white">
+        <h4 class="mb-0">Model Evaluation</h4>
+    </div>
+    <div class="card-body">
+        <div class="row g-3">
+            <div class="col-md-4">
+                <div class="card bg-light border-0 text-center">
+                    <div class="card-body">
+                        <small class="text-muted">Silhouette Score</small>
+                        <p class="fs-4 fw-bold mb-0">{{ result.silhouette }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-light border-0 text-center">
+                    <div class="card-body">
+                        <small class="text-muted">Inertia</small>
+                        <p class="fs-4 fw-bold mb-0">{{ result.inertia }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-light border-0 text-center">
+                    <div class="card-body">
+                        <small class="text-muted">Clusters</small>
+                        <p class="fs-4 fw-bold mb-0">3</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="mt-3">The silhouette score ranges from -1 to 1. Values closer to 1 indicate well-separated, cohesive clusters. Values near 0 indicate overlapping clusters.</p>
+    </div>
+</div>
+
+<div class="card shadow-sm border-0 mb-4">
+    <div class="card-header bg-warning">
+        <h4 class="mb-0">Cluster Interpretation</h4>
+    </div>
+    <div class="card-body">
+        {% for i in interpretations %}
+        <div class="card bg-light border-0 mb-3">
+            <div class="card-body">
+                <h6>Cluster {{ i.cluster }} - {{ i.profile }}</h6>
+                <p class="mb-0 small">
+                    <strong>Size:</strong> {{ i.size }} vehicles |
+                    <strong>Avg Age:</strong> {{ i.avg_vehicle_age }} years |
+                    <strong>Avg Mileage:</strong> {{ i.avg_mileage }} miles
+                </p>
+            </div>
+        </div>
+        {% endfor %}
+        <p class="text-muted small">Cluster labels in K-Means are arbitrary. Interpretation is based on actual centroid values.</p>
+    </div>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-header bg-secondary text-white">
+        <h4 class="mb-0">Sample Clustered Records (first 100)</h4>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-sm table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Brand</th>
+                        <th>Model</th>
+                        <th>Year</th>
+                        <th>Vehicle Age</th>
+                        <th>Mileage</th>
+                        <th>Price</th>
+                        <th>Cluster</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in preview %}
+                    <tr>
+                        <td>{{ row.brand }}</td>
+                        <td>{{ row.model }}</td>
+                        <td>{{ row.model_year }}</td>
+                        <td>{{ row.vehicle_age }}</td>
+                        <td>{{ "%.0f"|format(row.mileage) }}</td>
+                        <td>{% if row.price %}{{ "%.0f"|format(row.price) }}{% else %}N/A{% endif %}</td>
+                        <td><span class="badge bg-primary">C{{ row.cluster }}</span></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
