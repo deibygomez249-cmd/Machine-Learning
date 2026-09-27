@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Use Case 1 — Shipping Weight Prediction{% endblock %}
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+        <li class="breadcrumb-item active">Use Case 1</li>
+    </ol>
+</nav>
+<div class="card shadow-sm border-0">
+    <div class="card-header bg-primary text-white"><h3 class="mb-0">Use Case 1 — Shipping Weight Prediction</h3></div>
+    <div class="card-body">
+        <p>A courier company wants to estimate the weight of a package based on its shipping cost. This is a <strong>regression problem</strong> solved with <strong>Linear Regression</strong>.</p>
+        <ul>
+            <li><strong>Independent variable:</strong> Shipping Cost (COP)</li>
+            <li><strong>Target variable:</strong> Package Weight (kg)</li>
+            <li><strong>Model:</strong> Linear Regression</li>
+        </ul>
+        <a href="{{ url_for('linear_application') }}" class="btn btn-primary">Try the Application</a>
+    </div>
+</div>
+{% endblock %}

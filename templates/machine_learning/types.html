@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Types of Machine Learning{% endblock %}
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{ url_for('ml_concepts') }}">Concepts</a></li>
+        <li class="breadcrumb-item active">Types of Machine Learning</li>
+    </ol>
+</nav>
+<div class="row g-4">
+    <div class="col-md-6">
+        <div class="card h-100 shadow-sm border-0">
+            <div class="card-header bg-primary text-white"><h5 class="mb-0">Supervised Learning</h5></div>
+            <div class="card-body">
+                <p>The algorithm learns from labeled data, where the expected output is already known.</p>
+                <p class="small mb-1"><strong>Used for:</strong> Classification and Regression.</p>
+                <p class="small mb-0"><strong>Example:</strong> Predicting if a student passes based on study hours.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card h-100 shadow-sm border-0">
+            <div class="card-header bg-success text-white"><h5 class="mb-0">Unsupervised Learning</h5></div>
+            <div class="card-body">
+                <p>The algorithm finds patterns in unlabeled data without predetermined outcomes.</p>
+                <p class="small mb-1"><strong>Used for:</strong> Clustering and Dimensionality Reduction.</p>
+                <p class="small mb-0"><strong>Example:</strong> Grouping customers with similar purchasing behavior.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card h-100 shadow-sm border-0">
+            <div class="card-header bg-warning"><h5 class="mb-0">Semi-supervised Learning</h5></div>
+            <div class="card-body">
+                <p>Combines a small amount of labeled data with a large amount of unlabeled data.</p>
+                <p class="small mb-1"><strong>Used for:</strong> Problems where labeling is expensive.</p>
+                <p class="small mb-0"><strong>Example:</strong> Classifying thousands of images when only a few are labeled.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card h-100 shadow-sm border-0">
+            <div class="card-header bg-danger text-white"><h5 class="mb-0">Reinforcement Learning</h5></div>
+            <div class="card-body">
+                <p>An agent learns through trial and error, receiving rewards for correct actions and penalties for wrong ones.</p>
+                <p class="small mb-1"><strong>Used for:</strong> Decision-making over time.</p>
+                <p class="small mb-0"><strong>Example:</strong> Training an AI agent to play a video game.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<a href="{{ url_for('use_case_1') }}" class="btn btn-primary mt-4">Next: Use Cases <i class="bi bi-arrow-right"></i></a>
+{% endblock %}

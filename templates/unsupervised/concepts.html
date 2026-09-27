@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}Unsupervised Learning - Concepts{% endblock %}
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+        <li class="breadcrumb-item active">Unsupervised Learning - Concepts</li>
+    </ol>
+</nav>
+
+<div class="card shadow-sm border-0 mb-4">
+    <div class="card-header bg-primary text-white">
+        <h3 class="mb-0">Unsupervised Learning - Concepts</h3>
+    </div>
+    <div class="card-body">
+        <p class="lead">Unsupervised learning is a branch of Machine Learning where the algorithm learns patterns from unlabeled data. Unlike supervised learning, there is no target variable to predict.</p>
+
+        <h5 class="text-primary">Supervised vs Unsupervised</h5>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <div class="card bg-light border-0 h-100">
+                    <div class="card-body">
+                        <h6>Supervised</h6>
+                        <ul class="mb-0 small">
+                            <li>Labeled data</li>
+                            <li>Predicts a known target</li>
+                            <li>Classification or regression</li>
+                            <li>Example: exam pass/fail</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card bg-light border-0 h-100">
+                    <div class="card-body">
+                        <h6>Unsupervised</h6>
+                        <ul class="mb-0 small">
+                            <li>Unlabeled data</li>
+                            <li>Discovers hidden structure</li>
+                            <li>Clustering or dimensionality reduction</li>
+                            <li>Example: used-car grouping</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h5 class="text-primary mt-4">What is Clustering?</h5>
+        <p>Clustering groups similar records together based on distance in the feature space. Records within the same cluster are more similar to each other than to records in other clusters.</p>
+
+        <h5 class="text-primary mt-4">What is K-Means?</h5>
+        <p>K-Means is a clustering algorithm that partitions the data into K groups. Each group is represented by a <strong>centroid</strong> - the mean position of the points assigned to that group.</p>
+
+        <h5 class="text-primary mt-4">How K-Means Works</h5>
+        <ol class="list-group list-group-numbered">
+            <li class="list-group-item">Select K initial centroids.</li>
+            <li class="list-group-item">Assign each record to the nearest centroid using Euclidean distance.</li>
+            <li class="list-group-item">Recalculate each centroid as the mean of its assigned records.</li>
+            <li class="list-group-item">Repeat steps 2 and 3 until the centroids stop changing (convergence).</li>
+        </ol>
+
+        <h5 class="text-primary mt-4">Euclidean Distance</h5>
+        <div class="bg-light p-3 rounded text-center">
+            <code>d = sqrt((x2 - x1)^2 + (y2 - y1)^2)</code>
+        </div>
+
+        <h5 class="text-primary mt-4">Why Scaling Matters</h5>
+        <p>Vehicle age ranges around 0-30, while mileage ranges around 0-300,000. Without scaling, mileage would dominate every distance calculation. We apply <strong>StandardScaler</strong> to bring both variables to a comparable scale.</p>
+
+        <h5 class="text-primary mt-4">Key Metrics</h5>
+        <ul>
+            <li><strong>Within-cluster variance (inertia):</strong> sum of squared distances from each point to its centroid. Lower is better.</li>
+            <li><strong>Silhouette score:</strong> ranges from -1 to 1. Higher values indicate better separation and cohesion.</li>
+        </ul>
+
+        <h5 class="text-primary mt-4">Contextualization - Used Car Market</h5>
+        <p>The used-car market contains vehicles with very different usage profiles. A car that is 2 years old with 15,000 miles is fundamentally different from a 12-year-old car with 180,000 miles. Dealers, analysts and buyers can benefit from understanding these natural groups.</p>
+        <p>Using only <strong>vehicle age</strong> and <strong>mileage</strong>, K-Means can identify groupings such as newer low-mileage vehicles, intermediate vehicles, and older high-mileage vehicles.</p>
+        <p>However, two variables cannot capture the full condition of a vehicle. Factors like accident history, service records, and brand reliability also matter.</p>
+
+        <a href="{{ url_for('unsupervised_manual') }}" class="btn btn-primary mt-3">
+            Next: Manual Exercise <i class="bi bi-arrow-right"></i>
+        </a>
+    </div>
+</div>
+{% endblock %}

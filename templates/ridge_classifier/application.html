@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block title %}Ridge Classifier — Application{% endblock %}
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+        <li class="breadcrumb-item active">Ridge Classifier — Application</li>
+    </ol>
+</nav>
+
+<div class="card shadow-sm border-0 mb-4">
+    <div class="card-header bg-warning"><h3 class="mb-0">Ridge Classifier — Application</h3></div>
+    <div class="card-body">
+        <h5>Problem Context</h5>
+        <p>A university wants to identify students at academic risk using four academic indicators.</p>
+        <h5>Dataset Information</h5>
+        <ul>
+            <li><strong>Dataset name:</strong> ridge_classifier.csv</li>
+            <li><strong>Total records:</strong> {{ info.records }}</li>
+            <li><strong>Training records (80%):</strong> {{ info.train_size }}</li>
+            <li><strong>Testing records (20%):</strong> {{ info.test_size }}</li>
+            <li><strong>Independent variables:</strong>
+                <ul>
+                    <li>study_hours — Study hours per week</li>
+                    <li>attendance — Attendance percentage</li>
+                    <li>previous_grade — Previous grade (0.0 – 5.0)</li>
+                    <li>assignments_completed — Number of assignments completed</li>
+                </ul>
+            </li>
+            <li><strong>Target variable:</strong> academic_risk</li>
+            <li><strong>Class 0:</strong> {{ info.class_0_meaning }}</li>
+            <li><strong>Class 1:</strong> {{ info.class_1_meaning }}</li>
+        </ul>
+    </div>
+</div>
+
+<div class="card shadow-sm border-0 mb-4">
+    <div class="card-body text-center">
+        <h5>Visualization</h5>
+        <img src="data:image/png;base64,{{ plot_url }}" alt="Ridge Classifier Plot" class="img-fluid rounded">
+    </div>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-header bg-primary text-white"><h5 class="mb-0">Prediction Form</h5></div>
+    <div class="card-body">
+        <form method="POST">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label for="study_hours" class="form-label">Study Hours</label>
+                    <input type="number" step="0.1" min="0" class="form-control" id="study_hours" name="study_hours" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="attendance" class="form-label">Attendance (%)</label>
+                    <input type="number" step="0.1" min="0" max="100" class="form-control" id="attendance" name="attendance" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="previous_grade" class="form-label">Previous Grade (0.0 – 5.0)</label>
+                    <input type="number" step="0.1" min="0" max="5" class="form-control" id="previous_grade" name="previous_grade" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="assignments_completed" class="form-label">Assignments Completed</label>
+                    <input type="number" step="1" min="0" class="form-control" id="assignments_completed" name="assignments_completed" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3"><i class="bi bi-play-fill"></i> Predict Academic Risk</button>
+        </form>
+
+        {% if error %}
+        <div class="alert alert-danger mt-3"><i class="bi bi-exclamation-triangle"></i> {{ error }}</div>
+        {% endif %}
+
+        {% if result is not none %}
+        <div class="alert {% if result == 1 %}alert-danger{% else %}alert-success{% endif %} mt-3">
+            <h5>
+                {% if result == 1 %}
+                <i class="bi bi-exclamation-triangle-fill"></i> Prediction: High Risk (Class 1)
+                {% else %}
+                <i class="bi bi-check-circle-fill"></i> Prediction: Low Risk (Class 0)
+                {% endif %}
+            </h5>
+            <p class="mb-0">Based on the submitted values, the Ridge Classifier classifies this student as <strong>{% if result == 1 %}High Risk{% else %}Low Risk{% endif %}</strong>.</p>
+        </div>
+        {% endif %}
+
+        <a href="{{ url_for('ridge_metrics') }}" class="btn btn-outline-primary mt-3">View Evaluation Metrics <i class="bi bi-arrow-right"></i></a>
+    </div>
+</div>
+{% endblock %}

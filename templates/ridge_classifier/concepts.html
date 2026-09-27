@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Ridge Classifier — Concepts{% endblock %}
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+        <li class="breadcrumb-item active">Ridge Classifier — Concepts</li>
+    </ol>
+</nav>
+<div class="card shadow-sm border-0">
+    <div class="card-header bg-warning"><h3 class="mb-0">Ridge Classifier — Concepts</h3></div>
+    <div class="card-body">
+        <p class="lead">The Ridge Classifier is a linear classification algorithm that uses L2 regularization to prevent overfitting. It is the classification counterpart of Ridge Regression.</p>
+        <h5>How does it work?</h5>
+        <p>The classifier converts the target into a numeric representation and fits a linear model using Ridge Regression internally. The predicted class is obtained by thresholding the model's output.</p>
+        <h5>What is Regularization?</h5>
+        <p>Regularization adds a penalty term to the loss function to keep the model's coefficients small, reducing overfitting and improving generalization.</p>
+        <h5>What is L2 Regularization?</h5>
+        <p>L2 regularization (also called Ridge) adds the sum of squared coefficients as a penalty. The strength is controlled by the <strong>alpha</strong> hyperparameter.</p>
+        <h5>Problems it can solve</h5>
+        <ul>
+            <li>Binary classification with multiple features</li>
+            <li>Multiclass classification</li>
+            <li>Problems where linear separability is a reasonable assumption</li>
+        </ul>
+        <h5>Main Characteristics</h5>
+        <ul>
+            <li>Fast to train</li>
+            <li>Works well with high-dimensional data</li>
+            <li>Handles multicollinearity better than plain linear models</li>
+        </ul>
+        <h5>Advantages</h5>
+        <ul>
+            <li>Reduces overfitting thanks to L2 penalty</li>
+            <li>Very efficient computationally</li>
+            <li>Simple to interpret</li>
+        </ul>
+        <h5>Limitations</h5>
+        <ul>
+            <li>Only captures linear relationships</li>
+            <li>Requires the alpha hyperparameter to be tuned</li>
+        </ul>
+        <h5>Real-world example</h5>
+        <p>Identifying students at academic risk using several academic indicators such as study hours, attendance, previous grade, and assignments completed.</p>
+        <a href="{{ url_for('ridge_application') }}" class="btn btn-warning">Go to Application <i class="bi bi-arrow-right"></i></a>
+    </div>
+</div>
+{% endblock %}

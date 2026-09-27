@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Model Comparison{% endblock %}
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+        <li class="breadcrumb-item active">Model Comparison</li>
+    </ol>
+</nav>
+
+<div class="card shadow-sm border-0 mb-4">
+    <div class="card-header bg-primary text-white"><h3 class="mb-0">Model Comparison</h3></div>
+    <div class="card-body">
+        <p>Comparison of the two classification models implemented in this project. All values are computed dynamically on each model's own test set.</p>
+        <table class="table table-striped table-bordered align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Metric</th>
+                    <th>Logistic Regression</th>
+                    <th>Ridge Classifier</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Accuracy</td><td>{{ logistic.accuracy }}</td><td>{{ ridge.accuracy }}</td></tr>
+                <tr><td>Precision</td><td>{{ logistic.precision }}</td><td>{{ ridge.precision }}</td></tr>
+                <tr><td>Recall</td><td>{{ logistic.recall }}</td><td>{{ ridge.recall }}</td></tr>
+                <tr><td>F1-score</td><td>{{ logistic.f1 }}</td><td>{{ ridge.f1 }}</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-body">
+        <h5>Interpretation</h5>
+        <p>According to the dynamically calculated F1-score, the best performing model is: <strong>{{ best }}</strong>.</p>
+        <p class="small text-muted">Note: Both models were trained on different classification problems (student exam result vs academic risk), so this comparison is illustrative of the workflow rather than a direct head-to-head benchmark.</p>
+    </div>
+</div>
+{% endblock %}

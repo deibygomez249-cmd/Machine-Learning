@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}Linear Regression — Application{% endblock %}
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+        <li class="breadcrumb-item active">Linear Regression — Application</li>
+    </ol>
+</nav>
+
+<div class="card shadow-sm border-0 mb-4">
+    <div class="card-header bg-primary text-white"><h3 class="mb-0">Linear Regression — Application</h3></div>
+    <div class="card-body">
+        <h5>Problem Context</h5>
+        <p>A courier company wants to estimate the weight of a package based on its shipping cost. We use the historical dataset to learn a linear relationship between both variables.</p>
+        <h5>Variables</h5>
+        <div class="row g-3 mb-3">
+            <div class="col-md-6"><div class="card bg-light border-0"><div class="card-body">
+                <strong>Independent variable (X):</strong> Shipping Cost (COP)
+            </div></div></div>
+            <div class="col-md-6"><div class="card bg-light border-0"><div class="card-body">
+                <strong>Dependent variable (Y):</strong> Package Weight (kg)
+            </div></div></div>
+        </div>
+        <h5>Dataset Information</h5>
+        <ul>
+            <li><strong>Total records:</strong> {{ info.records }}</li>
+            <li><strong>Training records (80%):</strong> {{ info.train_size }}</li>
+            <li><strong>Testing records (20%):</strong> {{ info.test_size }}</li>
+        </ul>
+        <div class="row g-3">
+            <div class="col-md-3"><div class="card bg-light border-0 text-center"><div class="card-body">
+                <small class="text-muted">Slope</small>
+                <h5>{{ info.slope }}</h5>
+            </div></div></div>
+            <div class="col-md-3"><div class="card bg-light border-0 text-center"><div class="card-body">
+                <small class="text-muted">Intercept</small>
+                <h5>{{ info.intercept }}</h5>
+            </div></div></div>
+            <div class="col-md-3"><div class="card bg-light border-0 text-center"><div class="card-body">
+                <small class="text-muted">R² Score</small>
+                <h5>{{ info.r2 }}</h5>
+            </div></div></div>
+            <div class="col-md-3"><div class="card bg-light border-0 text-center"><div class="card-body">
+                <small class="text-muted">RMSE</small>
+                <h5>{{ info.rmse }}</h5>
+            </div></div></div>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm border-0 mb-4">
+    <div class="card-body text-center">
+        <h5>Regression Visualization</h5>
+        <img src="data:image/png;base64,{{ plot_url }}" alt="Linear Regression Plot" class="img-fluid rounded">
+    </div>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-header bg-success text-white"><h5 class="mb-0">Prediction Form</h5></div>
+    <div class="card-body">
+        <form method="POST">
+            <div class="mb-3">
+                <label for="cost" class="form-label">Shipping Cost (COP)</label>
+                <input type="number" step="0.01" min="0" class="form-control" id="cost" name="cost" required>
+            </div>
+            <button type="submit" class="btn btn-success"><i class="bi bi-play-fill"></i> Predict Weight</button>
+        </form>
+
+        {% if error %}
+        <div class="alert alert-danger mt-3"><i class="bi bi-exclamation-triangle"></i> {{ error }}</div>
+        {% endif %}
+
+        {% if result is not none %}
+        <div class="alert alert-success mt-3">
+            <h5><i class="bi bi-check-circle-fill"></i> Predicted Package Weight</h5>
+            <p class="mb-0">For a shipping cost of <strong>{{ submitted_cost }} COP</strong>, the model predicts a weight of <strong>{{ result }} kg</strong>.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

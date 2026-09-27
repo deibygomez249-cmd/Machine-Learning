@@ -43,7 +43,6 @@
                     </div>
                 </form>
 
-                <!-- Result Section -->
                 {% if result and result is not string %}
                 <div class="alert alert-success border-0 shadow-sm mt-4" role="alert">
                     <div class="row align-items-center">
@@ -69,7 +68,6 @@
                     </div>
                 </div>
 
-                <!-- Model Info Cards -->
                 <div class="row mt-4 g-3">
                     <div class="col-md-6">
                         <div class="card bg-light border-0">
@@ -90,7 +88,6 @@
                 </div>
                 {% endif %}
 
-                <!-- Help Section -->
                 <div class="card bg-info bg-opacity-10 border-0 mt-4">
                     <div class="card-body">
                         <h6 class="card-title">
@@ -106,7 +103,6 @@
             </div>
         </div>
 
-        <!-- Back Button -->
         <div class="mt-4 text-center">
             <a href="{{ url_for('home') }}" class="btn btn-outline-secondary">
                 <i class="bi bi-arrow-left"></i> Volver al Inicio

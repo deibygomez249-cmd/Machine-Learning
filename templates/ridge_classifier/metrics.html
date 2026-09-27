@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}Ridge Classifier — Evaluation Metrics{% endblock %}
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+        <li class="breadcrumb-item active">Ridge Classifier — Metrics</li>
+    </ol>
+</nav>
+
+<div class="card shadow-sm border-0 mb-4">
+    <div class="card-header bg-warning"><h3 class="mb-0">Ridge Classifier — Evaluation Metrics</h3></div>
+    <div class="card-body">
+        <p>Metrics calculated on the testing set ({{ info.test_size }} records):</p>
+        <div class="row g-3">
+            <div class="col-md-3"><div class="card bg-light border-0 text-center"><div class="card-body">
+                <small class="text-muted">Accuracy</small><h4>{{ metrics.accuracy }}</h4>
+            </div></div></div>
+            <div class="col-md-3"><div class="card bg-light border-0 text-center"><div class="card-body">
+                <small class="text-muted">Precision</small><h4>{{ metrics.precision }}</h4>
+            </div></div></div>
+            <div class="col-md-3"><div class="card bg-light border-0 text-center"><div class="card-body">
+                <small class="text-muted">Recall</small><h4>{{ metrics.recall }}</h4>
+            </div></div></div>
+            <div class="col-md-3"><div class="card bg-light border-0 text-center"><div class="card-body">
+                <small class="text-muted">F1-score</small><h4>{{ metrics.f1 }}</h4>
+            </div></div></div>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm border-0 mb-4">
+    <div class="card-body">
+        <h5>Confusion Matrix</h5>
+        <table class="table table-bordered text-center align-middle">
+            <thead><tr><th></th><th>Predicted 0</th><th>Predicted 1</th></tr></thead>
+            <tbody>
+                <tr>
+                    <th>Actual 0</th>
+                    <td class="table-success">{{ metrics.true_negative }} (TN)</td>
+                    <td class="table-danger">{{ metrics.false_positive }} (FP)</td>
+                </tr>
+                <tr>
+                    <th>Actual 1</th>
+                    <td class="table-danger">{{ metrics.false_negative }} (FN)</td>
+                    <td class="table-success">{{ metrics.true_positive }} (TP)</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul class="list-group mt-3">
+            <li class="list-group-item"><strong>True Positive (TP):</strong> {{ metrics.true_positive }}</li>
+            <li class="list-group-item"><strong>True Negative (TN):</strong> {{ metrics.true_negative }}</li>
+            <li class="list-group-item"><strong>False Positive (FP):</strong> {{ metrics.false_positive }}</li>
+            <li class="list-group-item"><strong>False Negative (FN):</strong> {{ metrics.false_negative }}</li>
+        </ul>
+    </div>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-body">
+        <h5>Interpretation</h5>
+        <p>The Ridge Classifier achieved an accuracy of <strong>{{ metrics.accuracy }}</strong>, with precision <strong>{{ metrics.precision }}</strong>, recall <strong>{{ metrics.recall }}</strong> and F1-score <strong>{{ metrics.f1 }}</strong>. The L2 regularization helps the model generalize well across the four academic indicators.</p>
+    </div>
+</div>
+{% endblock %}
