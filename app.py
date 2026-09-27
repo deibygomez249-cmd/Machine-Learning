@@ -17,6 +17,12 @@ from models.ridge_classifier import (
     train_ridge_model, predict_academic_risk, generate_ridge_plot,
     get_ridge_metrics
 )
+from models.clustering import (
+    load_clean_data, get_dataset_info, select_manual_sample,
+    run_manual_kmeans, fit_sklearn_kmeans, interpret_clusters,
+    plot_manual_iteration, plot_sklearn_clusters, plot_variance
+)
+from sklearn.preprocessing import StandardScaler
 
 app = Flask(__name__)
 
@@ -191,7 +197,8 @@ def logistic_application():
 @app.route('/logistic-regression/metrics')
 def logistic_metrics():
     metrics = get_logistic_metrics(logistic_model)
-    return render_template('logistic_regression/metrics.html', metrics=metrics, info=logistic_info)
+    return render_template('logistic_regression/metrics.html',
+                           metrics=metrics, info=logistic_info)
 
 
 @app.route('/ridge-classifier/concepts')
@@ -226,7 +233,8 @@ def ridge_application():
 @app.route('/ridge-classifier/metrics')
 def ridge_metrics():
     metrics = get_ridge_metrics(ridge_model)
-    return render_template('ridge_classifier/metrics.html', metrics=metrics, info=ridge_info)
+    return render_template('ridge_classifier/metrics.html',
+                           metrics=metrics, info=ridge_info)
 
 
 @app.route('/comparison')
@@ -247,7 +255,66 @@ def comparison():
     )
 
 
+@app.route('/unsupervised/concepts')
+def unsupervised_concepts():
+    return render_template('unsupervised/concepts.html')
+
+
+@app.route('/unsupervised/manual')
+def unsupervised_manual():
+    info = get_dataset_info()
+    df = load_clean_data()
+    sample = select_manual_sample(df)
+    manual_result = run_manual_kmeans(sample)
+
+    scaler = StandardScaler()
+    scaler.fit(sample[['vehicle_age', 'mileage']])
+
+    plots = []
+    for iteration in manual_result['iterations']:
+        plot_url = plot_manual_iteration(
+            sample,
+            np.array(iteration['assignments']),
+            np.array(iteration['centroids_after']),
+            scaler,
+            iteration['iteration']
+        )
+        plots.append(plot_url)
+
+    variance_plot = plot_variance(manual_result['iterations'])
+
+    return render_template(
+        'unsupervised/manual.html',
+        info=info,
+        manual=manual_result,
+        plots=plots,
+        variance_plot=variance_plot
+    )
+
+
+@app.route('/unsupervised/clustering')
+def unsupervised_clustering():
+    info = get_dataset_info()
+    df = load_clean_data()
+    result = fit_sklearn_kmeans(df)
+    interpretations = interpret_clusters(result['summary'])
+    plot_url = plot_sklearn_clusters(result['df_result'], result['centroids_original'])
+
+    preview = result['df_result'][[
+        'brand', 'model', 'model_year', 'vehicle_age',
+        'mileage', 'price', 'cluster'
+    ]].head(100).to_dict(orient='records')
+
+    return render_template(
+        'unsupervised/clustering.html',
+        info=info,
+        result=result,
+        interpretations=interpretations,
+        plot_url=plot_url,
+        preview=preview
+    )
+
+
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(debug=True, host='0.0.0.0', port=port)
-    #app.py actividad 1 y 2 
