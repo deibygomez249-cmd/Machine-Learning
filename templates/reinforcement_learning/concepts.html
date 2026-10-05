@@ -1,0 +1,219 @@
+{% extends "base.html" %}
+{% block title %}Reinforcement Learning - Concepts{% endblock %}
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+        <li class="breadcrumb-item active">Reinforcement Learning - Concepts</li>
+    </ol>
+</nav>
+
+<div class="card shadow-sm border-0 mb-4">
+    <div class="card-header bg-primary text-white">
+        <h3 class="mb-0">Reinforcement Learning - Concepts</h3>
+    </div>
+    <div class="card-body">
+        <p class="lead">Reinforcement Learning (RL) is a Machine Learning paradigm where an agent learns to make decisions by interacting with an environment. The agent receives rewards or penalties for its actions and progressively learns a policy that maximizes the expected return.</p>
+
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle"></i> <strong>Context of our implementation:</strong> a virtual agent navigates a 10×10 grid from the start cell (A) to the target cell (T), avoiding walls (#), minimizing danger zones (D) and learning an optimal path through trial and error.
+        </div>
+
+        <h5 class="text-primary mt-4">How our environment works</h5>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="table-dark">
+                    <tr><th>Character</th><th>Meaning</th><th>Count in our grid</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><span class="badge bg-primary">A</span></td><td>Agent start position</td><td>1</td></tr>
+                    <tr><td><span class="badge bg-success">T</span></td><td>Target cell</td><td>1</td></tr>
+                    <tr><td><span class="badge bg-light text-dark">o</span></td><td>Available path</td><td>68</td></tr>
+                    <tr><td><span class="badge bg-dark">#</span></td><td>Wall / obstacle</td><td>20</td></tr>
+                    <tr><td><span class="badge bg-danger">D</span></td><td>Danger Zone</td><td>10</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body">
+                <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex p-3 mb-2">
+                    <i class="bi bi-robot fs-3 text-primary"></i>
+                </div>
+                <h6>Agent</h6>
+                <p class="small mb-0">The virtual robot that moves through our grid. It starts at cell (0,0) and must reach cell (9,9). It decides which action to take at every step.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body">
+                <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex p-3 mb-2">
+                    <i class="bi bi-grid-3x3 fs-3 text-success"></i>
+                </div>
+                <h6>Environment</h6>
+                <p class="small mb-0">Our 10×10 grid of 100 cells. It contains 20 walls, 10 danger zones, one start and one target. It defines the rules the agent must respect.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body">
+                <div class="bg-warning bg-opacity-10 rounded-circle d-inline-flex p-3 mb-2">
+                    <i class="bi bi-arrow-left-right fs-3 text-warning"></i>
+                </div>
+                <h6>Interaction</h6>
+                <p class="small mb-0">At every step, the agent selects an action, the environment responds with a reward and a new state. The cycle repeats until the goal is reached.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm border-0 mb-4">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">Concepts applied to our exercise</h4>
+    </div>
+    <div class="card-body">
+        <div class="accordion" id="conceptsAccordion">
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#c1">
+                        Foundations: RL, Agent, Environment
+                    </button>
+                </h2>
+                <div id="c1" class="accordion-collapse collapse show" data-bs-parent="#conceptsAccordion">
+                    <div class="accordion-body">
+                        <p><strong>What is Reinforcement Learning?</strong> A learning paradigm where an agent learns by interacting with an environment. Unlike supervised learning, there are no labeled examples. The agent learns from the consequences of its own actions.</p>
+                        <p><strong>Agent:</strong> the learner and decision-maker. In our project, it is the virtual robot that moves cell by cell. Its only tools are the four possible actions and the feedback it receives.</p>
+                        <p><strong>Environment:</strong> everything the agent interacts with. Our environment is a 10×10 grid of 100 cells that contains 1 start, 1 target, 20 walls, 10 danger zones and 68 free path cells.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c2">
+                        Interaction: State, Action, Reward, Penalty
+                    </button>
+                </h2>
+                <div id="c2" class="accordion-collapse collapse" data-bs-parent="#conceptsAccordion">
+                    <div class="accordion-body">
+                        <p><strong>State:</strong> the current situation of the agent. In our project, a state is the pair (row, column) of the cell where the agent is standing. There are 100 possible states, but only the non-wall ones are reachable.</p>
+                        <p><strong>Action:</strong> a decision made by the agent. We use four actions: UP, DOWN, LEFT, RIGHT. Each action moves the agent one cell in that direction if the move is valid.</p>
+                        <p><strong>Reward:</strong> positive feedback after a good action. In our grid, only reaching the target (T) produces a reward of +100.</p>
+                        <p><strong>Penalty:</strong> negative feedback after a bad or non-productive action. In our grid we have four penalties: -1 for a normal step, -3 for trying to leave the grid, -5 for hitting a wall, -10 for entering a danger zone.</p>
+                        <div class="table-responsive mt-2">
+                            <table class="table table-sm table-bordered">
+                                <thead class="table-dark"><tr><th>Event</th><th>Reward</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Moving to a normal path cell</td><td class="text-danger">-1</td></tr>
+                                    <tr><td>Attempting to leave the grid</td><td class="text-danger">-3</td></tr>
+                                    <tr><td>Colliding with a wall (#)</td><td class="text-danger">-5</td></tr>
+                                    <tr><td>Entering a danger zone (D)</td><td class="text-danger">-10</td></tr>
+                                    <tr><td>Reaching the target (T)</td><td class="text-success">+100</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c3">
+                        Learning cycle: Policy, Step, Episode, Experience
+                    </button>
+                </h2>
+                <div id="c3" class="accordion-collapse collapse" data-bs-parent="#conceptsAccordion">
+                    <div class="accordion-body">
+                        <p><strong>Policy:</strong> the agent's strategy. It maps each state to the action the agent decides to take. Our policy is implicit in the Q-values: at each state the agent chooses the action with the highest estimated Q-value.</p>
+                        <p><strong>Step:</strong> a single interaction (state, action, reward, next state). Our grid allows up to 200 steps per episode to prevent infinite loops.</p>
+                        <p><strong>Episode:</strong> a complete run from start to termination. An episode ends when the agent reaches the target or when the maximum number of steps is reached. We train for 1000 episodes.</p>
+                        <p><strong>Experience:</strong> a transition observed by the agent, stored as (state, action, reward, next state). Each experience is used to update the Q-values via the SGDRegressor.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c4">
+                        Strategy: Exploration, Exploitation, Epsilon-Greedy
+                    </button>
+                </h2>
+                <div id="c4" class="accordion-collapse collapse" data-bs-parent="#conceptsAccordion">
+                    <div class="accordion-body">
+                        <p><strong>Exploration:</strong> trying random actions to discover new parts of the environment. Essential at the beginning of training when the agent knows nothing.</p>
+                        <p><strong>Exploitation:</strong> using the knowledge already acquired to choose the action with the best estimated Q-value. Essential at the end of training when the agent has learned a good policy.</p>
+                        <p><strong>Epsilon-Greedy strategy:</strong> a simple rule that balances both behaviors. With probability epsilon, the agent explores (random action). With probability (1 − epsilon), the agent exploits (best action).</p>
+                        <p>In our implementation, epsilon starts at 1.0 (100% exploration) and decreases by a factor of 0.995 after each episode until it reaches the minimum of 0.05 (5% residual exploration).</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c5">
+                        Values: Immediate reward, Return, Discount factor, V(s), Q(s,a), Q-Learning
+                    </button>
+                </h2>
+                <div id="c5" class="accordion-collapse collapse" data-bs-parent="#conceptsAccordion">
+                    <div class="accordion-body">
+                        <p><strong>Immediate reward:</strong> the feedback received right after a single action. Example: after moving to a normal cell, the reward is -1.</p>
+                        <p><strong>Return:</strong> the total discounted reward accumulated from a given state until the end of the episode. The agent's objective is to maximize the expected return.</p>
+                        <p><strong>Discount factor (γ):</strong> a number between 0 and 1 that determines how much the agent values future rewards compared to immediate ones. We use γ = 0.95, meaning the agent cares strongly about future outcomes but still prefers rewards that come sooner.</p>
+                        <p><strong>State value V(s):</strong> the expected return when starting at state s and following the current policy. It measures how "good" it is to be in a state.</p>
+                        <p><strong>Action value Q(s,a):</strong> the expected return when starting at state s, taking action a and following the current policy afterward. This is the value the agent actually learns.</p>
+                        <p><strong>Q-Learning:</strong> an off-policy algorithm that updates Q-values using the Bellman equation: <code>Q(s,a) ← r + γ · max Q(s', a')</code>. In our implementation, the Q-values are estimated by an SGDRegressor trained incrementally with partial_fit.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm border-0 mb-4">
+    <div class="card-header bg-success text-white">
+        <h4 class="mb-0">Learning flow in our implementation</h4>
+    </div>
+    <div class="card-body">
+        <div class="d-flex flex-wrap align-items-center gap-2">
+            <span class="badge bg-primary p-2">Environment</span>
+            <i class="bi bi-arrow-right"></i>
+            <span class="badge bg-primary p-2">Initial State</span>
+            <i class="bi bi-arrow-right"></i>
+            <span class="badge bg-warning text-dark p-2">Action Selection</span>
+            <i class="bi bi-arrow-right"></i>
+            <span class="badge bg-warning text-dark p-2">Exploration / Exploitation</span>
+            <i class="bi bi-arrow-right"></i>
+            <span class="badge bg-info p-2">Environment Interaction</span>
+            <i class="bi bi-arrow-right"></i>
+            <span class="badge bg-info p-2">Reward</span>
+            <i class="bi bi-arrow-right"></i>
+            <span class="badge bg-secondary p-2">Next State</span>
+            <i class="bi bi-arrow-right"></i>
+            <span class="badge bg-secondary p-2">Q-value Update</span>
+            <i class="bi bi-arrow-right"></i>
+            <span class="badge bg-dark p-2">Next Action</span>
+            <i class="bi bi-arrow-right"></i>
+            <span class="badge bg-success p-2">Goal / End of Episode</span>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-body">
+        <div class="alert alert-primary mb-0">
+            <i class="bi bi-lightbulb"></i> <strong>Note:</strong> unlike supervised learning, RL does not use labeled examples. The only source of learning is the reward signal received after each action. This makes RL suitable for decision problems where the correct action is not known in advance.
+        </div>
+        <a href="{{ url_for('rl_application') }}" class="btn btn-primary mt-3">
+            Next: Application <i class="bi bi-arrow-right"></i>
+        </a>
+    </div>
+</div>
+{% endblock %}

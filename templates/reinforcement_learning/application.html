@@ -1,0 +1,270 @@
+{% extends "base.html" %}
+{% block title %}Reinforcement Learning - Application{% endblock %}
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{ url_for('rl_concepts') }}">Reinforcement Learning - Concepts</a></li>
+        <li class="breadcrumb-item active">Application</li>
+    </ol>
+</nav>
+
+<div class="card shadow-sm border-0 mb-4">
+    <div class="card-header bg-primary text-white">
+        <h3 class="mb-0">Q-Learning Application - Find the Target</h3>
+    </div>
+    <div class="card-body">
+        <p class="lead">The agent starts at cell (0,0) and must reach cell (9,9). It learns a policy from scratch using Q-Learning with an Epsilon-Greedy strategy.</p>
+
+        <h5 class="text-primary mt-3">Environment</h5>
+        <div class="table-responsive">
+            <table class="table table-bordered text-center mb-0">
+                <tbody>
+                    {% for row_idx in range(10) %}
+                    <tr>
+                        {% for col_idx in range(10) %}
+                            {% set cell = grid[row_idx][col_idx] %}
+                            {% set is_path = result and (row_idx, col_idx) in result.path %}
+                            <td class="{% if cell == '#' %}table-dark text-white{% elif cell == 'D' %}table-danger{% elif cell == 'T' %}table-success{% elif is_path %}table-warning fw-bold{% endif %}">
+                                {{ cell }}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="mt-3">
+            <span class="badge bg-primary">A</span> Agent start
+            <span class="badge bg-success">T</span> Target
+            <span class="badge bg-light text-dark border">o</span> Path
+            <span class="badge bg-dark">#</span> Wall
+            <span class="badge bg-danger">D</span> Danger Zone
+            <span class="badge bg-warning text-dark">Learned path</span>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-6">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-header bg-secondary text-white">
+                <h5 class="mb-0">Reward System</h5>
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-striped mb-0">
+                    <thead class="table-dark"><tr><th>Event</th><th>Reward</th></tr></thead>
+                    <tbody>
+                        <tr><td>Normal movement</td><td class="text-danger">{{ rewards.normal }}</td></tr>
+                        <tr><td>Attempt to leave grid</td><td class="text-danger">{{ rewards.out_of_bounds }}</td></tr>
+                        <tr><td>Collision with wall</td><td class="text-danger">{{ rewards.wall }}</td></tr>
+                        <tr><td>Entering Danger Zone</td><td class="text-danger">{{ rewards.danger }}</td></tr>
+                        <tr><td>Reaching the Target</td><td class="text-success fw-bold">{{ rewards.goal }}</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-header bg-secondary text-white">
+                <h5 class="mb-0">Training Configuration</h5>
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-striped mb-0">
+                    <thead class="table-dark"><tr><th>Parameter</th><th>Value</th></tr></thead>
+                    <tbody>
+                        <tr><td>Episodes</td><td>{{ episodes }}</td></tr>
+                        <tr><td>Gamma (discount factor)</td><td>{{ gamma }}</td></tr>
+                        <tr><td>Initial epsilon</td><td>{{ initial_epsilon }}</td></tr>
+                        <tr><td>Minimum epsilon</td><td>{{ min_epsilon }}</td></tr>
+                        <tr><td>Epsilon decay</td><td>{{ epsilon_decay }}</td></tr>
+                        <tr><td>Maximum steps per episode</td><td>{{ max_steps }}</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm border-0 mb-4">
+    <div class="card-body text-center">
+        <form method="POST">
+            <button type="submit" class="btn btn-primary btn-lg">
+                <i class="bi bi-play-fill"></i> Train Agent
+            </button>
+        </form>
+        <p class="text-muted small mt-2 mb-0">Training runs the agent through {{ episodes }} episodes of interaction with the environment.</p>
+    </div>
+</div>
+
+{% if result %}
+<div class="card shadow-sm border-0 mb-4">
+    <div class="card-header bg-success text-white">
+        <h4 class="mb-0">Training Results</h4>
+    </div>
+    <div class="card-body">
+        <div class="row g-3">
+            <div class="col-md-3">
+                <div class="card bg-light border-0 text-center">
+                    <div class="card-body">
+                        <small class="text-muted">Total Episodes</small>
+                        <p class="fs-4 fw-bold mb-0">{{ result.episodes }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-light border-0 text-center">
+                    <div class="card-body">
+                        <small class="text-muted">Successful Episodes</small>
+                        <p class="fs-4 fw-bold mb-0">{{ result.successes }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-light border-0 text-center">
+                    <div class="card-body">
+                        <small class="text-muted">Success Percentage</small>
+                        <p class="fs-4 fw-bold mb-0">{{ result.success_percentage }}%</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-light border-0 text-center">
+                    <div class="card-body">
+                        <small class="text-muted">Final Epsilon</small>
+                        <p class="fs-4 fw-bold mb-0">{{ result.final_epsilon }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-light border-0 text-center">
+                    <div class="card-body">
+                        <small class="text-muted">Average Reward (last 100)</small>
+                        <p class="fs-4 fw-bold mb-0">{{ result.average_reward }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-light border-0 text-center">
+                    <div class="card-body">
+                        <small class="text-muted">Movements (final eval)</small>
+                        <p class="fs-4 fw-bold mb-0">{{ result.movements }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-light border-0 text-center">
+                    <div class="card-body">
+                        <small class="text-muted">Total Reward (final eval)</small>
+                        <p class="fs-4 fw-bold mb-0">{{ result.total_reward }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-light border-0 text-center">
+                    <div class="card-body">
+                        <small class="text-muted">Goal Reached</small>
+                        <p class="fs-4 fw-bold mb-0">
+                            {% if result.reached_goal %}<span class="text-success">Yes</span>{% else %}<span class="text-danger">No</span>{% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm border-0 mb-4">
+    <div class="card-header bg-warning text-dark">
+        <h4 class="mb-0">Learned Path (Final Evaluation, epsilon = 0)</h4>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered text-center mb-0">
+                <tbody>
+                    {% for row_idx in range(10) %}
+                    <tr>
+                        {% for col_idx in range(10) %}
+                            {% set cell = grid[row_idx][col_idx] %}
+                            {% set is_path = (row_idx, col_idx) in result.path %}
+                            <td class="{% if cell == '#' %}table-dark text-white{% elif cell == 'D' %}table-danger{% elif cell == 'T' %}table-success{% elif is_path %}table-warning fw-bold{% endif %}">
+                                {{ cell }}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <p class="small text-muted mt-2 mb-0">Cells highlighted in yellow belong to the path followed by the trained agent during the final evaluation.</p>
+    </div>
+</div>
+
+<div class="card shadow-sm border-0 mb-4">
+    <div class="card-header bg-info text-white">
+        <h4 class="mb-0">Step-by-Step Evaluation</h4>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-sm table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Step</th>
+                        <th>State</th>
+                        <th>Action</th>
+                        <th>Next State</th>
+                        <th>Cell Type</th>
+                        <th>Reward</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for s in result.steps %}
+                    <tr>
+                        <td>{{ s.number }}</td>
+                        <td>{{ s.state }}</td>
+                        <td>{{ s.action }}</td>
+                        <td>{{ s.next_state }}</td>
+                        <td>{{ s.cell_type }}</td>
+                        <td class="{% if s.reward > 0 %}text-success fw-bold{% else %}text-danger{% endif %}">{{ s.reward }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-header bg-secondary text-white">
+        <h4 class="mb-0">Q-Values per State</h4>
+    </div>
+    <div class="card-body">
+        <p class="small text-muted">These values are learned by the SGDRegressor. During exploitation (epsilon = 0) the agent selects the action with the highest Q-value.</p>
+        <div class="table-responsive">
+            <table class="table table-sm table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>State</th>
+                        <th>UP</th>
+                        <th>DOWN</th>
+                        <th>LEFT</th>
+                        <th>RIGHT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in result.q_table %}
+                    <tr>
+                        <td>{{ row.state }}</td>
+                        {% for v in row.action_values %}
+                        <td>{{ '%.2f'|format(v) }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
