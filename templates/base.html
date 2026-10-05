@@ -71,7 +71,6 @@
                         <li><a class="dropdown-item" href="{{ url_for('comparison') }}"><i class="bi bi-bar-chart"></i> Model Comparison</a></li>
                     </ul>
                 </li>
-                <!-- Newly added Unsupervised dropdown -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                         <i class="bi bi-diagram-3"></i> Unsupervised
@@ -80,6 +79,15 @@
                         <li><a class="dropdown-item" href="{{ url_for('unsupervised_concepts') }}">Concepts</a></li>
                         <li><a class="dropdown-item" href="{{ url_for('unsupervised_manual') }}">Manual Exercise</a></li>
                         <li><a class="dropdown-item" href="{{ url_for('unsupervised_clustering') }}">Clustering Application</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                        <i class="bi bi-controller"></i> Reinforcement Learning
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{ url_for('rl_concepts') }}">Concepts</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('rl_application') }}">Application</a></li>
                     </ul>
                 </li>
             </ul>

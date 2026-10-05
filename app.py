@@ -22,6 +22,20 @@ from models.clustering import (
     run_manual_kmeans, fit_sklearn_kmeans, interpret_clusters,
     plot_manual_iteration, plot_sklearn_clusters, plot_variance
 )
+from models.reinforcement_learning import (
+    train as rl_train,
+    GRID as RL_GRID,
+    START as RL_START,
+    GOAL as RL_GOAL,
+    ACTION_NAMES as RL_ACTION_NAMES,
+    REWARDS as RL_REWARDS,
+    GAMMA as RL_GAMMA,
+    INITIAL_EPSILON as RL_INITIAL_EPSILON,
+    MIN_EPSILON as RL_MIN_EPSILON,
+    EPSILON_DECAY as RL_EPSILON_DECAY,
+    MAX_STEPS as RL_MAX_STEPS,
+    DEFAULT_EPISODES as RL_DEFAULT_EPISODES,
+)
 from sklearn.preprocessing import StandardScaler
 
 app = Flask(__name__)
@@ -312,6 +326,34 @@ def unsupervised_clustering():
         interpretations=interpretations,
         plot_url=plot_url,
         preview=preview
+    )
+
+
+@app.route('/reinforcement-learning/concepts')
+def rl_concepts():
+    return render_template('reinforcement_learning/concepts.html')
+
+
+@app.route('/reinforcement-learning/application', methods=['GET', 'POST'])
+def rl_application():
+    result = None
+    if request.method == 'POST':
+        result = rl_train(episodes=RL_DEFAULT_EPISODES)
+
+    return render_template(
+        'reinforcement_learning/application.html',
+        grid=RL_GRID,
+        start=RL_START,
+        goal=RL_GOAL,
+        actions=RL_ACTION_NAMES,
+        rewards=RL_REWARDS,
+        episodes=RL_DEFAULT_EPISODES,
+        gamma=RL_GAMMA,
+        initial_epsilon=RL_INITIAL_EPSILON,
+        min_epsilon=RL_MIN_EPSILON,
+        epsilon_decay=RL_EPSILON_DECAY,
+        max_steps=RL_MAX_STEPS,
+        result=result
     )
 
 
